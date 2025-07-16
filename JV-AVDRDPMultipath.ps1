@@ -10,16 +10,16 @@ Write-Host "     _           _   _        __     __            _   _  _
                                                        |__/                  " -ForegroundColor DarkCyan
 
 # === PARAMETERS ===
-$regPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\RdpCloudStackSettings"
+$AvdMultipathReg = "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\RdpCloudStackSettings"
 $valueName = "SmilesV3ActivationThreshold"
 $valueData = 100 # 100 means enabled, 0 means disabled.
 # === END PARAMETERS ===
 
 # Step 1: Check if the registry key exists and creates it
-if (-not (Test-Path $regPath)) {
-    New-Item -Path $regPath -Force | Out-Null
+if (-not (Test-Path $AvdMultipathReg)) {
+    New-Item -Path $AvdMultipathReg -Force | Out-Null
 }
 
 # Step 2: Add or update the DWORD value
-New-ItemProperty -Path $regPath -Name $valueName -Value $valueData -PropertyType DWord -Force | Out-Null
-Write-Host "Registry value $valueName has been set to $valueData in $regPath"
+New-ItemProperty -Path $AvdMultipathReg -Name $valueName -Value $valueData -PropertyType DWord -Force | Out-Null
+Write-Host "Registry value $valueName has been set to $valueData in $AvdMultipathReg"
